@@ -22,7 +22,7 @@ public class UsuarioModel {
         collection.insertOne(document);
     }
 
-    public void otener() {
+    public void obtener() {
         FindIterable<Document> usuarios = collection.find();
 
         for (Document usuario: usuarios) {
