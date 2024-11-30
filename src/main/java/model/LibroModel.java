@@ -10,50 +10,32 @@ import org.bson.Document;
 import java.util.Objects;
 import java.util.Optional;
 
-public class LibroModel {
+public class LibroModel implements Model {
 
-    public final MongoCollection<Document> collection;
+    private final Model model;
 
-    public LibroModel(MongoDatabase database) {collection = database.getCollection("libros"); }
+    public LibroModel(String nombre, MongoDatabase database) {
+        this.model = new ModelImplemet(nombre, database);
+    }
 
-    public void guardar(Document document) {collection.insertOne(document);}
+    public void guardar(Document document) {
+        this.model.guardar(document);
+    }
 
     public void obtener() {
-        FindIterable<Document> libros = collection.find();
-
-        for(Document libro: libros) {
-            System.out.println(libro);
-        }
+        this.model.obtener();
     }
 
     public Optional<Document> obtenerPorId(Document document) {
-        Document libro = collection.find(document).first();
-
-        if(!Objects.isNull(libro)) {
-            System.out.println(libro);
-            return  Optional.of(libro);
-        }
-        return Optional.empty();
+        return this.model.obtenerPorId(document);
     }
 
-    public void actualizar(Document documentoActual, Document documentoNuevo) {
-        UpdateResult updateResult = collection.updateOne(documentoActual, documentoNuevo);
-
-        if(updateResult.getModifiedCount() > 0){
-            System.out.println("Libro actualizado con éxito");
-        } else {
-            System.out.println("El libro no fue encontrado");
-        }
+    public String actualizar(Document documentoActual, Document documentoNuevo) {
+        return "Libro " + this.model.actualizar(documentoActual, documentoNuevo);
     }
 
-    public void eliminar(Document document) {
-        DeleteResult deleteResult = collection.deleteOne(document);
-
-        if(deleteResult.getDeletedCount() > 0) {
-            System.out.println("Libro eliminado con éxito");
-        }else {
-            System.out.println("El libro no fue encontrado");
-        }
+    public String eliminar(Document document) {
+        return "Libro " + this.model.eliminar(document);
     }
 
 }

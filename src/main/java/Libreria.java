@@ -12,24 +12,29 @@ public class Libreria {
         MongoClient mongoClient = MongoClients.create(connectionString);
         MongoDatabase database = mongoClient.getDatabase("libreria");
 
-        UsuarioModel usuarioModel = new UsuarioModel(database);
+//        UsuarioModel usuarioModel = new UsuarioModel(database);
+//
+
+//        Document segundoDocumento = new Document("nombre", "Enrique")
+//                .append("email", "enrique@gmail.com")
+//                .append("password", "321");
+//
+//        //usuarioModel.guardar(document);
+//        //usuarioModel.guardar(segundoDocumento);
+//
+//        //usuarioModel.obtener();
+//
+//        ObjectId objectId = new ObjectId("674a51ddaf441a33e42ce3e7");
+//        Document documentoABuscar = new Document("_id", objectId);
+//        usuarioModel.obtenerPorId(documentoABuscar);
+
+        UsuarioModel usuarioModel = new UsuarioModel("usuarios", database);
 
         Document document = new Document("nombre", "Luis")
                 .append("email", "luis@gmail.com")
                 .append("password", "123");
-
-        Document segundoDocumento = new Document("nombre", "Enrique")
-                .append("email", "enrique@gmail.com")
-                .append("password", "321");
-
-        //usuarioModel.guardar(document);
-        //usuarioModel.guardar(segundoDocumento);
-
-        //usuarioModel.obtener();
-
-        ObjectId objectId = new ObjectId("674a51ddaf441a33e42ce3e7");
-        Document documentoABuscar = new Document("_id", objectId);
-        usuarioModel.obtenerPorId(documentoABuscar);
+        usuarioModel.guardar(document);
+        
 
 
     }

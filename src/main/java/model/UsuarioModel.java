@@ -1,69 +1,38 @@
 package model;
 
-import com.mongodb.client.FindIterable;
-import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.result.DeleteResult;
-import com.mongodb.client.result.UpdateResult;
 import org.bson.Document;
 
-import java.util.Objects;
 import java.util.Optional;
 
-public class UsuarioModel {
+public class UsuarioModel implements Model {
 
-    private final MongoCollection<Document> collection;
+    private final Model model;
 
-    public UsuarioModel(MongoDatabase database) {
-        collection = database.getCollection("usuarios");
+    public UsuarioModel(String nombre, MongoDatabase database) {
+        this.model = new ModelImplemet(nombre, database);
     }
 
+    @Override
     public void guardar(Document document) {
-        collection.insertOne(document);
+        this.model.guardar(document);
     }
 
+    @Override
     public void obtener() {
-        FindIterable<Document> usuarios = collection.find();
-
-        for (Document usuario: usuarios) {
-//            ObjectId id = usuario.getObjectId("_id");
-//            String nombre = usuario.getString("nombre");
-//            String email = usuario.getString("email");
-//            String password = usuario.getString("passsword");
-            System.out.println(usuario);
-        }
+        this.model.obtener();
     }
 
-    public Optional<Document> obtenerPorId(Document document){
-
-        Document usuario = collection.find(document).first();
-
-        if(!Objects.isNull(usuario)) {
-            System.out.println(usuario);
-            return Optional.of(usuario);
-        }
-        return Optional.empty();
+    @Override
+    public Optional<Document> obtenerPorId(Document document) {
+        return this.obtenerPorId(document);
     }
 
-    public void actualizar(Document documentoActual, Document documentoNuevo){
-
-        UpdateResult updateResult = collection.updateOne(documentoActual, documentoNuevo);
-
-        if(updateResult.getModifiedCount() > 0) {
-            System.out.println("Usuario actualizado con éxito");
-        } else {
-            System.out.println("El usuario no fue encontrado");
-        }
-
+    public String actualizar(Document documentoActual, Document documentoNuevo){
+        return "Usuario " + this.model.actualizar(documentoActual, documentoNuevo);
     }
 
-    public void eliminar(Document document) {
-        DeleteResult deleteResult = collection.deleteOne(document);
-
-        if(deleteResult.getDeletedCount() > 0) {
-            System.out.println("Usuario eliminado con éxito");
-        } else {
-            System.out.println("El usuario no fue encontrado");
-        }
+    public String eliminar(Document document) {
+       return "Usuario " + this.model.eliminar(document);
     }
 }
