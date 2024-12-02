@@ -1,13 +1,10 @@
 package model;
 
-import com.mongodb.client.FindIterable;
-import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.result.DeleteResult;
-import com.mongodb.client.result.UpdateResult;
+import model.proxy.Model;
+import model.proxy.ModelImplemet;
 import org.bson.Document;
 
-import java.util.Objects;
 import java.util.Optional;
 
 public class LibroModel implements Model {

@@ -1,4 +1,4 @@
-package model;
+package model.proxy;
 
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;

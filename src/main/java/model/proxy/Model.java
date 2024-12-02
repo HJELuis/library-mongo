@@ -1,4 +1,4 @@
-package model;
+package model.proxy;
 
 import org.bson.Document;
 

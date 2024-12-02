@@ -1,6 +1,8 @@
 package model;
 
 import com.mongodb.client.MongoDatabase;
+import model.proxy.Model;
+import model.proxy.ModelImplemet;
 import org.bson.Document;
 
 import java.util.Optional;
