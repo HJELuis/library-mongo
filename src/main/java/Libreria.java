@@ -2,8 +2,9 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 import model.UsuarioModel;
+import model.state.DatosGuardados;
+import model.state.Notificador;
 import org.bson.Document;
-import org.bson.types.ObjectId;
 
 public class Libreria {
 
@@ -11,6 +12,9 @@ public class Libreria {
         String connectionString = "mongodb://root:toor@localhost:27017";
         MongoClient mongoClient = MongoClients.create(connectionString);
         MongoDatabase database = mongoClient.getDatabase("libreria");
+
+        Notificador notificador = new Notificador();
+        notificador.estado();
 
 //        UsuarioModel usuarioModel = new UsuarioModel(database);
 //
@@ -34,6 +38,9 @@ public class Libreria {
                 .append("email", "luis@gmail.com")
                 .append("password", "123");
         usuarioModel.guardar(document);
+
+        notificador.setEstado(new DatosGuardados());
+        notificador.estado();
         
 
 
