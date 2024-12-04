@@ -15,6 +15,10 @@ public class UsuarioModel implements Model {
         this.model = new ModelImplemet(nombre, database);
     }
 
+    public UsuarioModel(Model model) {
+        this.model = model;
+    }
+
     @Override
     public void guardar(Document document) {
         this.model.guardar(document);
@@ -27,7 +31,7 @@ public class UsuarioModel implements Model {
 
     @Override
     public Optional<Document> obtenerPorId(Document document) {
-        return this.obtenerPorId(document);
+        return this.model.obtenerPorId(document);
     }
 
     public String actualizar(Document documentoActual, Document documentoNuevo){

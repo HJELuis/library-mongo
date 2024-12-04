@@ -15,6 +15,10 @@ public class LibroModel implements Model {
         this.model = new ModelImplemet(nombre, database);
     }
 
+    public LibroModel(Model model) {
+        this.model = model;
+    }
+
     public void guardar(Document document) {
         this.model.guardar(document);
     }

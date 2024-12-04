@@ -14,6 +14,10 @@ public class AutorModel implements Model {
         this.model = new ModelImplemet(nombre,database);
     }
 
+    public AutorModel(Model model) {
+        this.model = model;
+    }
+
     public void guardar(Document document) {
         this.model.guardar(document);
     }
