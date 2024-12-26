@@ -10,7 +10,5 @@ This project uses the next Docker images: [mongo](https://hub.docker.com/_/mongo
 
 ## Before execution
 
-You've already created a database
-
-The `persistense.xml` needs to have the right name of connection, port and database
+You've already created a database `libreria`
 
